@@ -12,13 +12,38 @@ def solve_Bellman_expectation(env, pi, gamma):
     """
 
     # Get state space and number of states
-    states = list(env.states())
+    states = sorted(list(env.states()))
     n_S = len(states)
 
     # store state values in an np.array
     V_pi = np.zeros(n_S)
 
-    
+    r_S = np.zeros(n_S)
+    P = np.zeros((n_S, n_S))
+
+    state_to_idx = {state: idx for idx, state in enumerate(states)}
+
+    for i, s_i in enumerate(states):
+        if s_i == env.battery_pos:
+            continue
+        
+        action = pi[s_i]
+
+        for s_next in env.successors(s_i):
+            prob = env.p(s_next, s_i, action)
+
+            if prob > 0.0:
+                j = state_to_idx[s_next]
+
+                P[i, j] += prob
+                rew = env.reward(s_next, s_i, action)
+                r_S[i] += prob * rew
+        
+    # Solve for V^pi
+    I = np.eye(n_S)
+    A = I - gamma * P
+    V_pi = np.linalg.solve(A, r_S)
+
     # Convert back to dictionary keyed by states
     return {states[i] : float(V_pi[i]) for i in range(n_S)}
 

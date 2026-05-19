@@ -21,11 +21,11 @@ pi_d = {s : down for s in env.states()}
 gam_0_9 = 0.9
 gam_0_1 = 0.1
 
-#V_pi_dr_gam_0_9 = solve_Bellman_expectation()
+V_pi_dr_gam_0_9 = solve_Bellman_expectation(env, pi_dr, gam_0_9)
 #V_pi_dr_gam_0_1 = solve_Bellman_expectation()
 #V_pi_d_gam_0_9 = solve_Bellman_expectation()
 
-#plot_V()
+plot_V(env, V_pi_dr_gam_0_9)
 #plot_V()
 #plot_V()
 

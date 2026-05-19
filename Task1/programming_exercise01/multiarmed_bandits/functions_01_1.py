@@ -69,7 +69,7 @@ def epsilon_greedy(multiArmedBandit, n=10000, epsilon=0.1, time_varying=False, d
 
     for i in range(n):
         if time_varying:
-            epsilon = delta / (i + 1)
+            epsilon = delta / (i+1)
 
         if np.random.rand() < epsilon:
             action = multiArmedBandit.rng.integers(multiArmedBandit.K)  # Explore: random action
@@ -126,6 +126,35 @@ def ucb(multiArmedBandit, optimal_arm, n=10000, c=2):
     optimal_percentage = []
     regret = []
 
-    # ... 
+    Q = np.zeros(multiArmedBandit.K)
+    N = np.zeros(multiArmedBandit.K)
+
+    total_reward = 0.0
+    optimal_action_count = 0
+    cumulative_regret = 0.0
+
+    for t in range(1, n+1):
+        ucb_values = np.zeros(multiArmedBandit.K)
+        for a in range(multiArmedBandit.K):
+            if N[a] == 0:
+                ucb_values[a] = np.inf  # If N_t-1(a) == 0, value is +infinity
+            else:
+                ucb_values[a] = Q[a] + c * np.sqrt(np.log(t) / N[a])
+        
+        action = np.argmax(ucb_values)
+
+        reward = multiArmedBandit.sample(action)
+        total_reward += reward
+
+        if action == multiArmedBandit.a_star:
+            optimal_action_count += 1
+        cumulative_regret += (multiArmedBandit.mu_star - multiArmedBandit.Mus[action])
+
+        avg_rewards.append(total_reward / (t))
+        optimal_percentage.append(optimal_action_count / (t))
+        regret.append(cumulative_regret)
+
+        N[action] += 1
+        Q[action] += (reward - Q[action]) / N[action]
 
     return avg_rewards, optimal_percentage, regret

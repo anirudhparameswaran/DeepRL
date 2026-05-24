@@ -23,25 +23,28 @@ def solve_Bellman_expectation(env, pi, gamma):
 
     state_to_idx = {state: idx for idx, state in enumerate(states)}
 
-    for i, s_i in enumerate(states):
-        if s_i == env.battery_pos:
-            continue
-        
-        action = pi[s_i]
+    for s_i in states:
+        i = state_to_idx[s_i]
 
-        for s_next in env.successors(s_i):
-            prob = env.p(s_next, s_i, action)
+        policy = pi[s_i]
+        for a_idx, action in enumerate(env.actions):
+            action_prob = policy[a_idx]
 
-            if prob > 0.0:
-                j = state_to_idx[s_next]
+            if action_prob > 0.0:
+                for s_j in states:
+                    trans_prob = env.p(s_j, s_i, action)
 
-                P[i, j] += prob
-                rew = env.reward(s_next, s_i, action)
-                r_S[i] += prob * rew
+                    if trans_prob > 0.0:
+                        j = state_to_idx[s_j]
+                        reward = env.reward(s_j, s_i, action)
+                        r_S[i] += action_prob * trans_prob * reward
+                        P[i, j] += action_prob * trans_prob
         
     # Solve for V^pi
     I = np.eye(n_S)
     A = I - gamma * P
+    print(P)
+    print(r_S)
     V_pi = np.linalg.solve(A, r_S)
 
     # Convert back to dictionary keyed by states
@@ -107,6 +110,11 @@ def iterative_policy_evaluation(env, pi, gamma, max_iters=100, tol = 0, V_true=N
         # Bellman expectation update
         for s in env.states():
             # MAKE CHANGES HERE
+            v_new = 0.0
+
+            for a in env.actions:
+                action_prob = pi[s][a]
+                
             V_new[s] = V_last[s]
 
     

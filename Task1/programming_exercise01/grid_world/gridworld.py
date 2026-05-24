@@ -40,6 +40,10 @@ class GridWorld:
         Returns a set of valid successor states that can be reached from the given state by taking any of the possible actions.
         I.e., all states s' with sum_a p(s'|s,a) > 0.
         '''
+
+        if state == self.battery_pos:
+            return set()
+
         up = (state[0]-1, state[1])
         down = (state[0]+1, state[1])
         left = (state[0], state[1]-1)
@@ -61,17 +65,28 @@ class GridWorld:
         account.
         '''
 
-        p = 0.0
+        if state == self.battery_pos or state in self.obstacles:
+            return 0.0
+        
+        target = state
+        if action == 'Up':
+            target = (state[0] - 1, state[1])
+        elif action == 'Down':
+            target = (state[0] + 1, state[1])
+        elif action == 'Left':
+            target = (state[0], state[1] - 1)
+        elif action == 'Right':
+            target = (state[0], state[1] + 1)
 
-        if successor in self.successors(state) and state != self.battery_pos:
-            p = 1.0
-    
-        return p
+        if target == successor and target in self.successors(state):
+            return 1.0
+        else:
+            return 0.0
 
     def step(self, state, action):
         '''
         Given a state and an action, returns the successor for the transition under action. 
-        '''        
+        '''
         succs = state
 
         if action == 'Down':

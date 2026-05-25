@@ -68,6 +68,32 @@ def td_prediction(env, pi, gamma, alpha, s0, n_samples=200, T=100, V_true = None
     for i in range(n_samples):
         
         # MAKE CHANGES HERE
+        # Initialize episode starting state
+        state = s0 if s0 is not None else random.choice(list(env.states()))
+        
+        # Decay learning rate as specified in the docstring
+        curr_alpha = alpha / np.sqrt(i + 1)
+        
+        # Generate an episode of maximum horizon T
+        for t in range(T):
+            if state == env.battery_pos:
+                break
+                
+            # Sample action from policy π(a|s)
+            action = random.choices(range(env.num_actions), weights=pi[state])[0]
+            
+            # Safe mapping if the environment still expects string actions 
+            # (like 'Up', 'Down') instead of integer indices
+            env_action = env.actions[action] if isinstance(env.actions[0], str) and isinstance(action, int) else action
+            
+            # Environment transition and reward
+            next_state = env.step(state, env_action)
+            reward = env.reward(next_state, state, env_action)
+            
+            # TD(0) value update
+            V[state] += curr_alpha * (reward + gamma * V[next_state] - V[state])
+            
+            state = next_state
         
         # Optional diagnostics
         if V_true is not None:
@@ -143,7 +169,48 @@ def SARSA(env, gamma, alpha, eps, s0, n_samples=200, T=100):
     # Loop over Monte Carlo episodes
     for i in range(n_samples):
         # MAKE CHANGES HERE
-        Q = Q
+        # Initialize episode starting state
+        state = s0 if s0 is not None else random.choice(list(env.states()))
+        
+        # Sample initial action from current ε-greedy policy π(a|s)
+        action = random.choices(range(env.num_actions), weights=pi[state])[0]
+        
+        for t in range(T):
+            # Safe mapping if the environment still expects string actions
+            env_action = env.actions[action] if isinstance(env.actions[0], str) and isinstance(action, int) else action
+            
+            # Environment transition
+            next_state = env.step(state, env_action)
+            
+            # Reward received from transition
+            reward = env.reward(next_state, state, env_action)
+            
+            # Check if next state is terminal
+            if next_state == env.battery_pos:
+                Q[state, action] += alpha * (reward - Q[state, action])
+                break
+                
+            # Sample next action from policy π(a|s')
+            next_action = random.choices(range(env.num_actions), weights=pi[next_state])[0]
+            
+            # SARSA value estimate update using temporal differences
+            Q[state, action] += alpha * (reward + gamma * Q[next_state, next_action] - Q[state, action])
+            
+            # Update policy online (ensure ε-greedy with respect to new Q)
+            Q_s = np.array([Q[(state, a)] for a in range(env.num_actions)])
+            max_Q_s = np.max(Q_s)
+            greedy_indices = np.where(Q_s >= max_Q_s - 1e-12)[0]
+            n_greedy = len(greedy_indices)
+            
+            # Base exploration probability
+            pi[state][:] = eps / env.num_actions
+            # Add exploitation mass to greedy actions
+            for a in greedy_indices:
+                pi[state][a] += (1.0 - eps) / n_greedy
+            
+            # Move to the next step
+            state = next_state
+            action = next_action
 
     return Q, pi
 

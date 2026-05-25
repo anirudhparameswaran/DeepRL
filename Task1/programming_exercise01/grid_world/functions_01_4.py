@@ -66,6 +66,39 @@ def ev_monte_carlo(env, pi, gamma, s0, n_samples=200, T=100, V_true = None):
     for i in range(n_samples):
         
         # MAKE CHANGES HERE
+        # Set the initial state
+        curr_state = s0
+        trajectory = []
+
+        # 1. Generate an episode of maximum length T
+        for _ in range(T):
+            # Terminate if the battery position (goal) is reached
+            if curr_state == env.battery_pos:
+                break
+                
+            # Sample an action from the policy for the current state
+            action_probs = pi[curr_state]
+            action = np.random.choice(env.actions, p=action_probs)
+            
+            # Step in the environment
+            next_state = env.step(curr_state, action)
+            reward = env.reward(next_state, curr_state, action)
+            
+            # Store the transition
+            trajectory.append((curr_state, action, reward))
+            
+            # Move to the next state
+            curr_state = next_state
+            
+        # 2. Update value estimates using Every-Visit Monte Carlo
+        G = 0.0
+        # Iterate backwards through the trajectory to calculate the return G
+        for s_t, a_t, r_t in reversed(trajectory):
+            G = gamma * G + r_t
+            
+            # Every-visit: update the count and value for EVERY occurrence of s_t
+            N[s_t] += 1
+            V[s_t] += (G - V[s_t]) / N[s_t]
         
         # Optional diagnostics
         if V_true is not None:
@@ -132,6 +165,43 @@ def fv_monte_carlo(env, pi, gamma, s0, n_samples=200, T=100, V_true = None):
     for i in range(n_samples):
         
         # MAKE CHANGES HERE
+
+        curr_state = s0
+
+        trajectory = []
+
+        for _ in range(T):
+            # Terminate if the battery position (goal) is reached
+            if curr_state == env.battery_pos:
+                break
+                
+            # Sample an action from the policy for the current state
+            action_probs = pi[curr_state]
+            action = np.random.choice(env.actions, p=action_probs)
+            
+            # Step in the environment
+            next_state = env.step(curr_state, action)
+            reward = env.reward(next_state, curr_state, action)
+            
+            # Store the transition
+            trajectory.append((curr_state, action, reward))
+            
+            # Move to the next state
+            curr_state = next_state
+
+        G = 0.0
+        # Pre-extract states to easily check for prior visits
+        states_in_trajectory = [step[0] for step in trajectory]
+        
+        # Iterate backwards through the trajectory to calculate the return G
+        for t in range(len(trajectory) - 1, -1, -1):
+            s_t, a_t, r_t = trajectory[t]
+            G = gamma * G + r_t
+            
+            # First-visit check: only update if s_t does not appear earlier in the episode
+            if s_t not in states_in_trajectory[:t]:
+                N[s_t] += 1
+                V[s_t] += (G - V[s_t]) / N[s_t]
         
         # Optional diagnostics
         if V_true is not None:

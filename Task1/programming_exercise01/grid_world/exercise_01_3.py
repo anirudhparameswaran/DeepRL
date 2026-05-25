@@ -22,15 +22,15 @@ gam_0_9 = 0.9
 gam_0_1 = 0.1
 
 V_pi_dr_gam_0_9 = solve_Bellman_expectation(env, pi_dr, gam_0_9)
-#V_pi_dr_gam_0_1 = solve_Bellman_expectation()
-#V_pi_d_gam_0_9 = solve_Bellman_expectation()
+V_pi_dr_gam_0_1 = solve_Bellman_expectation(env, pi_dr, gam_0_1)
+V_pi_d_gam_0_9 = solve_Bellman_expectation(env, pi_d, gam_0_9)
 
 plot_V(env, V_pi_dr_gam_0_9)
-#plot_V()
-#plot_V()
+plot_V(env, V_pi_dr_gam_0_1)
+plot_V(env, V_pi_d_gam_0_9)
 
-#V_ipe_0_9, dist_ipe_0_9 = iterative_policy_evaluation()
-#V_ipe_0_1, dist_ipe_0_1 = iterative_policy_evaluation()
+V_ipe_0_9, dist_ipe_0_9 = iterative_policy_evaluation(env, pi_d, gam_0_9, V_true=V_pi_d_gam_0_9)
+V_ipe_0_1, dist_ipe_0_1 = iterative_policy_evaluation(env, pi_d, gam_0_1, V_true=V_pi_d_gam_0_9)
         
 # Plot with shaded variance
 plt.figure(figsize=(8,5))
@@ -49,8 +49,8 @@ plt.rcParams.update({
     "grid.alpha": 0.3,
 })
 
-#plt.plot(dist_ipe_0_9, label='Iterative policy evaluation, $\gamma = 0.9$', color='orange')
-#plt.plot(dist_ipe_0_1, label='Iterative policy evaluation, $\gamma = 0.1$', color='blue')
+plt.plot(dist_ipe_0_9, label=r'Iterative policy evaluation, $\gamma = 0.9$', color='orange', alpha=0.7)
+plt.plot(dist_ipe_0_1, label=r'Iterative policy evaluation, $\gamma = 0.1$', color='blue', alpha=0.7)
     
 plt.yscale('log')
 plt.xlabel(r'Number of iterations')

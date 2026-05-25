@@ -43,8 +43,6 @@ def solve_Bellman_expectation(env, pi, gamma):
     # Solve for V^pi
     I = np.eye(n_S)
     A = I - gamma * P
-    print(P)
-    print(r_S)
     V_pi = np.linalg.solve(A, r_S)
 
     # Convert back to dictionary keyed by states
@@ -111,13 +109,19 @@ def iterative_policy_evaluation(env, pi, gamma, max_iters=100, tol = 0, V_true=N
         for s in env.states():
             # MAKE CHANGES HERE
             v_new = 0.0
+            policy = pi[s]
+            for a_idx, action in enumerate(env.actions):
+                action_prob = policy[a_idx]
 
-            for a in env.actions:
-                action_prob = pi[s][a]
+                if action_prob > 0.0:
+                    for s_next in env.successors(s):
+                        trans_prob = env.p(s_next, s, action)
+
+                        if trans_prob > 0.0:
+                            reward = env.reward(s_next, s, action)
+                            v_new += action_prob * trans_prob * (reward + gamma * V_last[s_next])
                 
-            V_new[s] = V_last[s]
-
-    
+            V_new[s] = v_new
 
         # stropping condition
         if max(np.abs(V_last[s] - V_new[s]) for s in env.states()) < tol:

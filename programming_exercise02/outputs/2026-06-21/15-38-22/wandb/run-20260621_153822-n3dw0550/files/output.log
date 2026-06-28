@@ -1,0 +1,5 @@
+/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torchrl/collectors/_base.py:377: UserWarning: A policy device was provided but no parameter/buffer could be found in the policy. Casting to policy_device is therefore impossible. The collector will trust that the devices match. To suppress this warning, set `trust_policy=True` when building the collector.
+  warnings.warn(
+500it [01:58,  4.23it/s]00 [01:58<00:02, 4096.79it/s, num_env_steps=500000.00000, avg_step_rew=-2.02443, std
+DQN:  98%|▉| 491000/500000 [01:58<00:02, 4151.06it/s, num_env_steps=500000.00000, avg_step_rew=-2.02443, std
+[92m2026-06-21 15:38:23,781 [torchrl][INFO][0m    Initialized LazyTensorStorage with torch.Size([100000]) shape[92m [END][0m

@@ -1,0 +1,1 @@
+{"num_env_steps":10000,"_timestamp":1.7826568049625342e+09,"epsilon":1,"avg_dqn_loss":8.66641902923584,"_runtime":2.534419724,"avg_step_rew":-1.9100271463394165,"std_step_rew":11.167510986328125,"avg_q_values":-2.5427892208099365,"_step":10000,"_wandb":{"runtime":2}}

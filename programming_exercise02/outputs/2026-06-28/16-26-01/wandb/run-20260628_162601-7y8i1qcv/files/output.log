@@ -1,0 +1,17 @@
+DQN:   0%|        /home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/tensordict/_td.py:2732: UserWarning: An output with one or more elements was resized since it had shape [1000], which does not match the required output shape [1000, 4]. This behavior is deprecated, and in a future PyTorch release outputs will not be resized unless they have zero elements. You can explicitly reuse an out tensor t by resizing it, inplace, to zero elements with t.resize_(0). (Triggered internally at /pytorch/aten/src/ATen/native/Resize.cpp:31.)
+  new_dest = torch.stack(
+[92m2026-06-28 16:26:02,765 [torchrl][INFO][0m    Initialized LazyTensorStorage with torch.Size([100000]) shape[92m [END][0m
+9it [00:02,  4.12it/s]
+DQN:   0%|                                                                                                                                | 0/500000 [00:02<?, ?it/s]
+Error executing job with overrides: []
+Traceback (most recent call last):
+  File "/home/anirudh/DeepRL/programming_exercise02/template/agents/dqn/train.py", line 84, in train
+    dqn_train_metrics = agent.update(dqn_replay_buffer, steps=int(status["num_env_steps"]))
+  File "/home/anirudh/DeepRL/programming_exercise02/template/agents/dqn/agent.py", line 88, in update
+    td_target = rewards + (self.cfg.optim.gamma * (1.0 - dones) * max_next_q)
+                           ^^^^^^^^^^^^^^^^^^^^
+omegaconf.errors.ConfigAttributeError: Key 'gamma' is not in struct
+    full_key: optim.gamma
+    object_type=dict
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

@@ -1,0 +1,68 @@
+_wandb:
+    value:
+        cli_version: 0.25.0
+        e:
+            wgdoc8dfsr6gi9euvf52iosq6cw4lbg9:
+                codePath: programming_exercise02/template/agents/sac/train.py
+                email: anirudhparameswaran@gmail.com
+                executable: /home/anirudh/DeepRL/programming_exercise02/.venv/bin/python3
+                git:
+                    commit: 248c94f59b9ad08da223ce0fbb767b7fceb71ab2
+                    remote: https://github.com/anirudhparameswaran/DeepRL
+                host: Rechenknecht
+                os: Linux-6.8.0-124-generic-x86_64-with-glibc2.35
+                program: /home/anirudh/DeepRL/programming_exercise02/template/agents/sac/train.py
+                python: CPython 3.13.13
+                root: /home/anirudh/DeepRL/programming_exercise02/outputs/2026-06-21/15-46-18
+                startedAt: "2026-06-21T13:46:18.616227Z"
+                writerId: wgdoc8dfsr6gi9euvf52iosq6cw4lbg9
+        m: []
+        python_version: 3.13.13
+        t:
+            "1":
+                - 1
+                - 50
+            "2":
+                - 1
+                - 50
+            "3":
+                - 16
+            "4": 3.13.13
+            "5": 0.25.0
+            "12": 0.25.0
+            "13": linux-x86_64
+alpha:
+    value:
+        autotune: true
+        lr: 0.0003
+        value: 0.2
+buffer:
+    value:
+        batch_size: 256
+        buffer_size: 50000
+collector:
+    value:
+        frames_per_batch: 1000
+        init_random_frames: 1000
+        total_frames: 50000
+device:
+    value: cpu
+env:
+    value:
+        name: Pendulum-v1
+evaluation:
+    value:
+        episodes: 10
+        eval_step_freq: 5000
+logging:
+    value:
+        project: sac-pendulum
+loss:
+    value:
+        gamma: 0.99
+        num_updates: 1
+optim:
+    value:
+        actor_lr: 0.0003
+        critic_lr: 0.0003
+        tau: 0.005

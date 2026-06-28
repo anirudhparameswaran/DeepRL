@@ -1,0 +1,84 @@
+_wandb:
+    value:
+        cli_version: 0.25.0
+        e:
+            ok6olsksb9wp5nzu90v381soe6rgq1el:
+                codePath: programming_exercise02/template/agents/dqn/train.py
+                cpu_count: 20
+                cpu_count_logical: 40
+                cudaVersion: "13.2"
+                disk:
+                    /:
+                        total: "1967317549056"
+                        used: "1646510510080"
+                email: anirudhparameswaran@gmail.com
+                executable: /home/anirudh/DeepRL/programming_exercise02/.venv/bin/python3
+                git:
+                    commit: 248c94f59b9ad08da223ce0fbb767b7fceb71ab2
+                    remote: https://github.com/anirudhparameswaran/DeepRL
+                gpu: NVIDIA RTX 6000 Ada Generation
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ada
+                      cudaCores: 18176
+                      memoryTotal: "51527024640"
+                      name: NVIDIA RTX 6000 Ada Generation
+                      uuid: GPU-00871e1b-524f-b7e2-4a83-f05379207d0d
+                host: Rechenknecht
+                memory:
+                    total: "269732511744"
+                os: Linux-6.8.0-124-generic-x86_64-with-glibc2.35
+                program: /home/anirudh/DeepRL/programming_exercise02/template/agents/dqn/train.py
+                python: CPython 3.13.13
+                root: /home/anirudh/DeepRL/programming_exercise02/outputs/2026-06-28/16-22-30
+                startedAt: "2026-06-28T14:22:31.313830Z"
+                writerId: ok6olsksb9wp5nzu90v381soe6rgq1el
+        m: []
+        python_version: 3.13.13
+        t:
+            "1":
+                - 1
+                - 50
+            "2":
+                - 1
+                - 50
+            "3":
+                - 16
+            "4": 3.13.13
+            "5": 0.25.0
+            "12": 0.25.0
+            "13": linux-x86_64
+buffer:
+    value:
+        batch_size: 128
+        buffer_size: 100000
+collector:
+    value:
+        frames_per_batch: 1000
+        init_random_frames: 10000
+        total_frames: 500000
+device:
+    value: cpu
+env:
+    value:
+        name: LunarLander-v3
+evaluation:
+    value:
+        episodes: 10
+        eval_step_freq: 10000
+exploration:
+    value:
+        eps_anneal_steps: 500000
+        eps_end_value: 0.025
+        eps_start_value: 1
+logging:
+    value:
+        project: dqn-lunar-lander
+loss:
+    value:
+        gamma: 0.99
+        num_updates: 100
+optim:
+    value:
+        lr: 0.00025
+        tau: 0.005

@@ -1,0 +1,16 @@
+{
+  "os":  "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+  "python":  "CPython 3.13.13",
+  "startedAt":  "2026-06-21T13:46:18.616227Z",
+  "program":  "/home/anirudh/DeepRL/programming_exercise02/template/agents/sac/train.py",
+  "codePath":  "programming_exercise02/template/agents/sac/train.py",
+  "git":  {
+    "remote":  "https://github.com/anirudhparameswaran/DeepRL",
+    "commit":  "248c94f59b9ad08da223ce0fbb767b7fceb71ab2"
+  },
+  "email":  "anirudhparameswaran@gmail.com",
+  "root":  "/home/anirudh/DeepRL/programming_exercise02/outputs/2026-06-21/15-46-18",
+  "host":  "Rechenknecht",
+  "executable":  "/home/anirudh/DeepRL/programming_exercise02/.venv/bin/python3",
+  "writerId":  "wgdoc8dfsr6gi9euvf52iosq6cw4lbg9"
+}

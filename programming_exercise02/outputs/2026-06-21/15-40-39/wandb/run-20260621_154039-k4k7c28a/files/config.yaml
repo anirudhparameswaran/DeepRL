@@ -1,0 +1,76 @@
+_wandb:
+    value:
+        cli_version: 0.25.0
+        e:
+            wy6l0hmuvy4z9ezhesy2tz0vrrrnvvrr:
+                codePath: programming_exercise02/template/agents/reinforce/train.py
+                cpu_count: 20
+                cpu_count_logical: 40
+                cudaVersion: "13.2"
+                disk:
+                    /:
+                        total: "1967317549056"
+                        used: "1640515764224"
+                email: anirudhparameswaran@gmail.com
+                executable: /home/anirudh/DeepRL/programming_exercise02/.venv/bin/python3
+                git:
+                    commit: 248c94f59b9ad08da223ce0fbb767b7fceb71ab2
+                    remote: https://github.com/anirudhparameswaran/DeepRL
+                gpu: NVIDIA RTX 6000 Ada Generation
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ada
+                      cudaCores: 18176
+                      memoryTotal: "51527024640"
+                      name: NVIDIA RTX 6000 Ada Generation
+                      uuid: GPU-00871e1b-524f-b7e2-4a83-f05379207d0d
+                host: Rechenknecht
+                memory:
+                    total: "269732511744"
+                os: Linux-6.8.0-124-generic-x86_64-with-glibc2.35
+                program: /home/anirudh/DeepRL/programming_exercise02/template/agents/reinforce/train.py
+                python: CPython 3.13.13
+                root: /home/anirudh/DeepRL/programming_exercise02/outputs/2026-06-21/15-40-39
+                startedAt: "2026-06-21T13:40:39.653818Z"
+                writerId: wy6l0hmuvy4z9ezhesy2tz0vrrrnvvrr
+        m: []
+        python_version: 3.13.13
+        t:
+            "1":
+                - 1
+                - 50
+            "2":
+                - 1
+                - 50
+            "3":
+                - 16
+                - 61
+            "4": 3.13.13
+            "5": 0.25.0
+            "12": 0.25.0
+            "13": linux-x86_64
+collector:
+    value:
+        num_episodes_per_iter: 1
+        total_num_episodes: 2500
+device:
+    value: cpu
+env:
+    value:
+        name: CartPole-v1
+evaluation:
+    value:
+        episodes: 10
+        eval_ep_freq: 10
+gamma:
+    value: 0.99
+logging:
+    value:
+        project: reinforce-cartpole
+loss:
+    value:
+        num_update_iters: 1
+        subtract_baseline_value: false
+optim:
+    value:
+        lr: 0.00025

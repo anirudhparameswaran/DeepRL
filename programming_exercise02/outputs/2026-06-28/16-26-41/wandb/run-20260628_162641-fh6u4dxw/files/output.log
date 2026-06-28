@@ -1,0 +1,49 @@
+DQN:   0%|        /home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/tensordict/_td.py:2732: UserWarning: An output with one or more elements was resized since it had shape [1000], which does not match the required output shape [1000, 4]. This behavior is deprecated, and in a future PyTorch release outputs will not be resized unless they have zero elements. You can explicitly reuse an out tensor t by resizing it, inplace, to zero elements with t.resize_(0). (Triggered internally at /pytorch/aten/src/ATen/native/Resize.cpp:31.)
+  new_dest = torch.stack(
+[92m2026-06-28 16:26:42,769 [torchrl][INFO][0m    Initialized LazyTensorStorage with torch.Size([100000]) shape[92m [END][0m
+10it [00:02,  4.15it/s]0 [00:02<20:02, 415.07it/s, num_env_steps=10000.00000, avg_step_rew=-1.91003, std_step_rew=11.16751, epsilon=1.00000, avg_dqn_loss=8.66642, av
+DQN:   0%| | 1000/500000 [00:02<20:03, 414.67it/s, num_env_steps=10000.00000, avg_step_rew=-1.91003, std_step_rew=11.16751, epsilon=1.00000, avg_dqn_loss=8.66642, av
+Error executing job with overrides: []
+Traceback (most recent call last):
+  File "/home/anirudh/DeepRL/programming_exercise02/template/agents/dqn/train.py", line 72, in train
+    for outidx, rollout in tqdm(enumerate(dqn_data_collector)):
+                           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+               ^^^^^^^^
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torchrl/collectors/_base.py", line 952, in __iter__
+    yield from self.iterator()
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torchrl/collectors/_single.py", line 1406, in iterator
+    tensordict_out = self.rollout()
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torchrl/_utils.py", line 607, in unpack_rref_and_invoke_function
+    return func(self, *args, **kwargs)
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torchrl/collectors/_single.py", line 1686, in rollout
+    env_output, env_next_output = self.env.step_and_maybe_reset(env_input)
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torchrl/envs/common.py", line 3826, in step_and_maybe_reset
+    tensordict = self.step(tensordict)
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torchrl/envs/common.py", line 2243, in step
+    next_tensordict = self._step(tensordict)
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torchrl/envs/gym_like.py", line 452, in _step
+    step_result = self._env.step(action)
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/gymnasium/wrappers/common.py", line 125, in step
+    observation, reward, terminated, truncated, info = self.env.step(action)
+                                                       ~~~~~~~~~~~~~^^^^^^^^
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/gymnasium/wrappers/common.py", line 393, in step
+    return super().step(action)
+           ~~~~~~~~~~~~^^^^^^^^
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/gymnasium/core.py", line 327, in step
+    return self.env.step(action)
+           ~~~~~~~~~~~~~^^^^^^^^
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/gymnasium/envs/box2d/lunar_lander.py", line 514, in step
+    assert self.action_space.contains(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        action
+        ^^^^^^
+    ), f"{action!r} ({type(action)}) invalid "
+    ^
+AssertionError: 6 (<class 'int'>) invalid
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

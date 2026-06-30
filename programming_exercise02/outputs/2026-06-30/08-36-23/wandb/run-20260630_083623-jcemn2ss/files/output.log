@@ -1,0 +1,3 @@
+500it [05:04,  1.64it/s]00 [05:04<00:03, 2287.22it/s, num_env_steps=500000.00000, avg_step_rew=0.16211, std_
+DQN:  98%|▉| 491000/500000 [05:04<00:05, 1610.52it/s, num_env_steps=500000.00000, avg_step_rew=0.16211, std_
+[92m2026-06-30 08:36:24,867 [torchrl][INFO][0m    Initialized LazyTensorStorage with torch.Size([100000]) shape[92m [END][0m

@@ -1,1 +1,4 @@
 deeprl/
+programming_exercise02/.venv
+programming_exercise02/template/__pycache__
+programming_exercise02/template/agents/dqn/__pycache__

@@ -1,0 +1,45 @@
+DQN:   0%|        /home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/tensordict/_td.py:2732: UserWarning: An output with one or more elements was resized since it had shape [1000], which does not match the required output shape [1000, 4]. This behavior is deprecated, and in a future PyTorch release outputs will not be resized unless they have zero elements. You can explicitly reuse an out tensor t by resizing it, inplace, to zero elements with t.resize_(0). (Triggered internally at /pytorch/aten/src/ATen/native/Resize.cpp:31.)
+  new_dest = torch.stack(
+[92m2026-06-28 19:36:58,862 [torchrl][INFO][0m    Initialized LazyTensorStorage with torch.Size([100000]) shape[92m [END][0m
+DQN:   0%| | 1000/50000/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/tensordict/_td.py:2732: UserWarning: An output with one or more elements was resized since it had shape [1000, 4], which does not match the required output shape [1000]. This behavior is deprecated, and in a future PyTorch release outputs will not be resized unless they have zero elements. You can explicitly reuse an out tensor t by resizing it, inplace, to zero elements with t.resize_(0). (Triggered internally at /pytorch/aten/src/ATen/native/Resize.cpp:31.)
+  new_dest = torch.stack(
+10it [00:02,  3.92it/s]
+DQN:   0%| | 1000/500000 [00:02<21:14, 391.50it/s, num_env_steps=10000.00000, avg_step_rew=-2.07108, std_step_rew=11.15095, epsilon=0.98050, avg_dqn_lo
+Error executing job with overrides: []
+Traceback (most recent call last):
+  File "/home/anirudh/DeepRL/programming_exercise02/template/agents/dqn/train.py", line 78, in train
+    dqn_replay_buffer.extend(rollout)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torchrl/data/replay_buffers/replay_buffers.py", line 87, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torchrl/data/replay_buffers/replay_buffers.py", line 938, in extend
+    return self._extend(data, update_priority=update_priority)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torchrl/data/replay_buffers/replay_buffers.py", line 895, in _extend
+    index = self._writer.extend(data)
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torchrl/data/replay_buffers/writers.py", line 213, in extend
+    self._storage.set(index, data)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/pyvers/implement_for.py", line 69, in __call__
+    return self._fn(*args, **kwargs)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/torchrl/data/replay_buffers/storages.py", line 1060, in set
+    self._storage[cursor] = data
+    ~~~~~~~~~~~~~^^^^^^^^
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/tensordict/_td.py", line 906, in __setitem__
+    self._set_at_str(
+    ~~~~~~~~~~~~~~~~^
+        value_key, item, index, validated=True, non_blocking=False
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/tensordict/_td.py", line 2628, in _set_at_str
+    tensor_out = _set_item(
+        tensor_in, idx, value, validated=validated, non_blocking=non_blocking
+    )
+  File "/home/anirudh/DeepRL/programming_exercise02/.venv/lib/python3.13/site-packages/tensordict/utils.py", line 619, in _set_item
+    tensor[index] = value
+    ~~~~~~^^^^^^^
+RuntimeError: shape mismatch: value tensor of shape [1000] cannot be broadcast to indexing result of shape [1000, 4]
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
